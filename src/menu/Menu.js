@@ -23,17 +23,13 @@ class Menu extends Component {
 
 class Welcome extends Component {
   render() {
-    if(! this.props.app.state.username)
-      return (
-        <div className="Welcome">
-          Welcome <b className="Username">Guest</b>
-        </div>
-      );
+    let username = this.props.app.state.username;
+    let usernameJSX = username ? <span> - <span className="Action" onClick={() => {this.props.app.setState({ username: ""}); return true; }}>Logout</span></span> : null;
 
     return (
       <div className="Welcome">
-        Welcome <b className="Username">{this.props.app.state.username}</b> -&nbsp;
-        <span className="Action" onClick={() => {this.props.app.setState({ username: ""}); return true; }}>Logout</span>
+        Welcome <b className="Username">{username ? username : "Guest"}</b>
+        {usernameJSX}
       </div>
     );
   }
