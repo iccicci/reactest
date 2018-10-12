@@ -1,0 +1,22 @@
+.Add {
+  height: 5vmin;
+  left: 2vmin;
+  top: 2vmin;
+  position: absolute;
+}
+
+.Menu {
+  top: 0;
+  right: 0;
+  width: 100%;
+  position: fixed;
+}
+
+.Username {
+  color: #13afdf;
+}
+
+.Welcome {
+  right: 2vmin;
+  position: absolute;
+}
