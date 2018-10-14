@@ -21,6 +21,11 @@ class App extends Component {
     this.socket.on("disconnect", () => {
       this.setState({ connected: false });
     });
+
+    this.socket.on("notes", data => {
+      console.log("notes", data.notes);
+      this.setState({ notes: data.notes });
+    });
   }
 
   login() {
