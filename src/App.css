@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .AppHeader {
   background-color: #0b3ead;
   min-height: 100vh;
@@ -24,24 +20,20 @@
   padding: 1vmin;
 }
 
-.Credits {
-  height: 10vh;
-  margin-top: 5vh;
-  font-size: calc(5px + 1vmin);
+.Icon {
+  cursor: pointer;
+  height: 4vmin;
+  margin-right: 4vmin;
+  margin-top: 3vmin;
 }
 
-a:link {
-  color: #61dafb;
-}
-
-a:visited {
-  color: #61dafb;
-}
-
-a:hover {
-  color: #61dafb;
-}
-
-a:active {
-  color: #61dafb;
+.Note {
+  text-align: justify;
+  background-color: white;
+  border-radius: 1vmin;
+  color: black;
+  margin-top: 5vmin;
+  padding: 3vmin;
+  white-space: pre-line;
+  width: 40vw;
 }

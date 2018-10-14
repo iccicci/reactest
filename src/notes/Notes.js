@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import Menu from "../menu/Menu";
+import Note from "../note/Note";
 import "./Notes.css";
-import logo from "../logo.svg";
 
 class Notes extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { notes: props.notes };
   }
 
   render() {
+    const { app } = this.props;
+    const { notes } = app.state;
+
     return (
       <header className="AppHeader">
-        <Menu app={this.props.app} />
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src={logo} className="App-logo" alt="logo" />
+        <Menu app={app} />
+        {notes.map(note => {
+          return <Note app={app} key={note.id} note={note} />;
+        })}
         <div className="Credits">
           Icons made by{" "}
           <a

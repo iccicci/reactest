@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { connected: false, username: "" };
+    this.state = { connected: false, notes: [], username: "" };
   }
 
   componentDidMount() {
@@ -23,7 +23,6 @@ class App extends Component {
     });
 
     this.socket.on("notes", data => {
-      console.log("notes", data.notes);
       this.setState({ notes: data.notes });
     });
   }
@@ -38,14 +37,14 @@ class App extends Component {
   }
 
   render() {
-    const { connected, username } = this.state;
+    const { connected, notes, username } = this.state;
 
     return (
       <div className="App">
         <header className="AppHeader">
           {connected ? (
             username ? (
-              <Notes app={this} />
+              <Notes app={this} notes={notes} />
             ) : (
               <Login app={this} />
             )
