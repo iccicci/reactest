@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
-import add from './Add.svg';
-import './Menu.css';
+import React, { Component } from "react";
+import add from "./Add.svg";
+import "./Menu.css";
 
 class Add extends Component {
   render() {
     return (
-      <img src={add} className="Add" alt="add note" onClick={() => this.props.newNote()} />
+      <img
+        src={add}
+        className="Add"
+        alt="add note"
+        onClick={() => this.props.newNote()}
+      />
     );
   }
 }
@@ -25,13 +30,26 @@ class Menu extends Component {
 
 class Welcome extends Component {
   render() {
-    const app      = this.props.app;
+    const app = this.props.app;
     const username = app.state.username;
 
     return (
       <div className="Welcome">
         Welcome <b className="Username">{username ? username : "Guest"}</b>
-        {username ? <span> - <span className="Action" onClick={() => { app.setState({ username: ""}) }}>Logout</span></span> : null}
+        {username ? (
+          <span>
+            {" "}
+            -{" "}
+            <span
+              className="Action"
+              onClick={() => {
+                app.setState({ username: "" });
+              }}
+            >
+              Logout
+            </span>
+          </span>
+        ) : null}
       </div>
     );
   }

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './Login.css';
+import React, { Component } from "react";
+import "./Login.css";
 
 class Login extends Component {
   constructor(props) {
@@ -12,8 +12,7 @@ class Login extends Component {
     const { error, username } = this.state;
     const data = { username: username };
 
-    if(error)
-      return;
+    if (error) return;
 
     app.socket.emit("login", data);
     app.setState(data);
@@ -21,19 +20,32 @@ class Login extends Component {
 
   render() {
     const { error, username } = this.state;
+    const style = error ? { backgroundColor: "gray" } : {};
 
     return (
       <div className="Login">
-        Username: <input type="text" placeholder="your username" value={username} onChange={event => this.updateUsername(event)} /><br /><br />
-        <div><span className="Button" onClick={() => this.login()}>Login</span></div><br />
-        <div className="Error">&nbsp;
-          {
-            error ?
-              error === 1 ?
-                "Allowed caracters: 0-9,A-Z,a-z" :
-                "Minimum 3 characters" :
-              ""
-          }
+        Username:{" "}
+        <input
+          type="text"
+          placeholder="your username"
+          value={username}
+          onChange={event => this.updateUsername(event)}
+        />
+        <br />
+        <br />
+        <div>
+          <span className="Button" onClick={() => this.login()} style={style}>
+            Login
+          </span>
+        </div>
+        <br />
+        <div className="Error">
+          &nbsp;
+          {error
+            ? error === 1
+              ? "Allowed caracters: 0-9,A-Z,a-z"
+              : "Minimum 3 characters"
+            : ""}
         </div>
       </div>
     );
@@ -43,11 +55,8 @@ class Login extends Component {
     var error = 0;
     const username = event.target.value;
 
-    if(username.length < 3)
-      error = 2;
-    else
-      if(! username.match(/^[0-9a-z]*$/i))
-        error = 1;
+    if (username.length < 3) error = 2;
+    else if (!username.match(/^[0-9a-z]*$/i)) error = 1;
 
     this.setState({ error: error, username: username });
   }
