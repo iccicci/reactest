@@ -1,0 +1,29 @@
+.Button {
+  background-color: #0b3ead;
+  border-radius: 1vmin;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 1vmin;
+}
+
+.Error {
+  color: #af1616;
+  font-size: 2vmin;
+  font-weight: bold;
+}
+
+.Login {
+  background-color: white;
+  border-radius: 1vmin;
+  color: #0b3ead;
+  padding: 2vmin;
+}
+
+input {
+  font-family: 'Courier New', Courier, monospace;
+  border: 0px;
+  border-bottom: 1px solid gray;
+  font-size: calc(10px + 2vmin);
+  outline: 0;
+}
