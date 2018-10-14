@@ -15,15 +15,22 @@ class App extends Component {
     this.socket = window.io();
 
     this.socket.on("connect", () => {
-      this.socket.emit("data", { 42: 23 });
-    });
-
-    this.socket.on("connect", () => {
+      if (this.state.username) this.login();
       this.setState({ connected: true });
     });
+
     this.socket.on("disconnect", () => {
       this.setState({ connected: false });
     });
+  }
+
+  login() {
+    this.socket.emit("login", { username: this.state.username });
+  }
+
+  logout() {
+    this.socket.emit("logout", {});
+    this.setState({ username: "" });
   }
 
   render() {

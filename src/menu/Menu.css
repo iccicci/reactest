@@ -12,6 +12,11 @@
   position: fixed;
 }
 
+.MenuButton {
+  background-color: white;
+  color: #0b3ead;
+}
+
 .Username {
   color: #13afdf;
 }

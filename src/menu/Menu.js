@@ -36,20 +36,16 @@ class Welcome extends Component {
     return (
       <div className="Welcome">
         Welcome <b className="Username">{username ? username : "Guest"}</b>
-        {username ? (
-          <span>
-            {" "}
-            -{" "}
-            <span
-              className="Action"
-              onClick={() => {
-                app.setState({ username: "" });
-              }}
-            >
-              Logout
-            </span>
-          </span>
-        ) : null}
+        <br />
+        <br />
+        <span
+          className="Button MenuButton"
+          onClick={() => {
+            app.logout();
+          }}
+        >
+          Logout
+        </span>
       </div>
     );
   }

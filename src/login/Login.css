@@ -1,10 +1,6 @@
-.Button {
+.LoginButton {
   background-color: #0b3ead;
-  border-radius: 1vmin;
   color: white;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 1vmin;
 }
 
 .Error {

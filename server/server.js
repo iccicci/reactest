@@ -20,9 +20,6 @@ var io = require("socket.io")(server);
 
 io.on("connection", function(client) {
   console.log("connected");
-  client.on("data", function(data) {
-    console.log(data);
-  });
   client.on("login", function(data) {
     console.log("login", data);
   });
