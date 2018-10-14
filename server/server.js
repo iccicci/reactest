@@ -7,23 +7,40 @@ const jsonServer = require("json-server");
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use("/api", jsonServer.router("../db.json"));
 
-app.get("/ping", function(req, res) {
-  return res.send("pong");
-});
-
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
 
 var server = require("http").createServer(app);
 var io = require("socket.io")(server);
+var users = {};
 
-io.on("connection", function(client) {
-  console.log("connected");
-  client.on("login", function(data) {
-    console.log("login", data);
+io.on("connection", client => {
+  var logout = () => {
+    const username = client.username;
+
+    users[username] = users[username].filter(val => {
+      return val !== client;
+    });
+
+    delete client.username;
+
+    console.log("logout", username);
+  };
+
+  client.on("login", data => {
+    const { username } = data;
+
+    client.username = username;
+
+    if (username in users) users[username].push(client);
+    else users[username] = [client];
+
+    console.log("login", username);
   });
-  client.on("disconnect", function() {});
+
+  client.on("logout", logout);
+  client.on("disconnect", logout);
 });
 
 server.listen(8080);

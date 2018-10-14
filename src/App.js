@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Login from "./login/Login";
-import Menu from "./menu/Menu";
-import logo from "./logo.svg";
+import Notes from "./notes/Notes";
 import "./App.css";
 
 class App extends Component {
@@ -38,60 +37,17 @@ class App extends Component {
 
     return (
       <div className="App">
-        {connected ? (
-          username ? (
-            <header className="App-header">
-              <Menu
-                app={this}
-                newNote={
-                  username
-                    ? () => console.log("sisi")
-                    : () => console.log("nono")
-                }
-              />
-              <img src={logo} className="App-logo" alt="logo" />
-              <img src={logo} className="App-logo" alt="logo" />
-              <img src={logo} className="App-logo" alt="logo" />
-              <div className="Credits">
-                Icons made by{" "}
-                <a
-                  href="https://www.flaticon.com/authors/smashicons"
-                  title="Share"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Share
-                </a>{" "}
-                from{" "}
-                <a
-                  href="https://www.flaticon.com/"
-                  title="Flaticon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  www.flaticon.com
-                </a>{" "}
-                is licensed by{" "}
-                <a
-                  href="http://creativecommons.org/licenses/by/3.0/"
-                  title="Creative Commons BY 3.0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  CC 3.0 BY
-                </a>
-              </div>
-            </header>
-          ) : (
-            <header className="App-header">
+        <header className="AppHeader">
+          {connected ? (
+            username ? (
+              <Notes app={this} />
+            ) : (
               <Login app={this} />
-            </header>
-          )
-        ) : (
-          <header className="App-header">
-            Error connecting to server; still retrying...
-          </header>
-        )}
+            )
+          ) : (
+            "Error connecting to server; still retrying..."
+          )}
+        </header>
       </div>
     );
   }

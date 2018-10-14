@@ -9,7 +9,7 @@ class Add extends Component {
         src={add}
         className="Add"
         alt="add note"
-        onClick={() => this.props.newNote()}
+        onClick={() => console.log(this.props.app)}
       />
     );
   }
@@ -17,11 +17,11 @@ class Add extends Component {
 
 class Menu extends Component {
   render() {
-    const { app, newNote } = this.props;
+    const { app } = this.props;
 
     return (
       <div className="Menu">
-        <Add newNote={newNote} />
+        <Add app={app} />
         <Welcome app={app} />
       </div>
     );
