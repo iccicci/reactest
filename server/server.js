@@ -40,16 +40,13 @@ io.on("connection", client => {
   const refresh = () => {
     const { userid, username } = client;
 
-    fetch(
-      `http://localhost:8080/api/users/${userid}/notes`,
-      (error, meta, body) => {
-        const notes = JSON.parse(body.toString());
+    fetch(`http://localhost:8080/api/users/${userid}/notes`, (error, meta, body) => {
+      const notes = JSON.parse(body.toString());
 
-        users[username].map(cl => {
-          cl.emit("notes", { notes: notes });
-        });
-      }
-    );
+      users[username].map(cl => {
+        cl.emit("notes", { notes: notes });
+      });
+    });
   };
 
   client.on("del", data => {
@@ -63,7 +60,6 @@ io.on("connection", client => {
       },
       (error, meta, body) => {
         refresh();
-        console.log(error, meta, body.toString());
       }
     );
   });
@@ -78,44 +74,41 @@ io.on("connection", client => {
     if (username in users) users[username].push(client);
     else users[username] = [client];
 
-    fetch(
-      `http://localhost:8080/api/users?username=${username}`,
-      (error, meta, body) => {
-        const users = JSON.parse(body.toString());
-        const attach = user => {
-          client.userid = user.id;
-          refresh();
-        };
+    fetch(`http://localhost:8080/api/users?username=${username}`, (error, meta, body) => {
+      const users = JSON.parse(body.toString());
+      const attach = user => {
+        client.userid = user.id;
+        refresh();
+      };
 
-        if (users.length && "id" in users[0]) return attach(users[0]);
+      if (users.length && "id" in users[0]) return attach(users[0]);
 
-        fetch(
-          `http://localhost:8080/api/users`,
-          {
-            headers: { "Content-Type": "application/json" },
-            method: "POST",
-            payload: JSON.stringify({ username: username })
-          },
-          (error, meta, body) => {
-            const user = JSON.parse(body.toString());
+      fetch(
+        `http://localhost:8080/api/users`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+          payload: JSON.stringify({ username: username })
+        },
+        (error, meta, body) => {
+          const user = JSON.parse(body.toString());
 
-            fetch(
-              `http://localhost:8080/api/users/${user.id}/notes`,
-              {
-                headers: { "Content-Type": "application/json" },
-                method: "POST",
-                payload: JSON.stringify({
-                  note: `Hello ${username},\n\nthis is your first note`
-                })
-              },
-              (error, meta, body) => {
-                attach(user);
-              }
-            );
-          }
-        );
-      }
-    );
+          fetch(
+            `http://localhost:8080/api/users/${user.id}/notes`,
+            {
+              headers: { "Content-Type": "application/json" },
+              method: "POST",
+              payload: JSON.stringify({
+                note: `Welcome <b>${username}</b>,<br /><br />this is your <i>first</i> note!`
+              })
+            },
+            (error, meta, body) => {
+              attach(user);
+            }
+          );
+        }
+      );
+    });
 
     console.log("login", username);
   });

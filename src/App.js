@@ -37,14 +37,14 @@ class App extends Component {
   }
 
   render() {
-    const { connected, notes, username } = this.state;
+    const { connected, username } = this.state;
 
     return (
       <div className="App">
         <header className="AppHeader">
           {connected ? (
             username ? (
-              <Notes app={this} notes={notes} />
+              <Notes app={this} />
             ) : (
               <Login app={this} />
             )

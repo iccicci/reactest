@@ -28,12 +28,7 @@
 }
 
 .Note {
-  text-align: justify;
   background-color: white;
-  border-radius: 1vmin;
+  border-radius: 2vmin;
   color: black;
-  margin-top: 5vmin;
-  padding: 3vmin;
-  white-space: pre-line;
-  width: 40vw;
 }

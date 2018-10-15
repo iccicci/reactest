@@ -1,0 +1,9 @@
+{
+  "editor.formatOnSave": true,
+  "git.ignoreMissingGitWarning": true,
+  "explorer.confirmDelete": false,
+  "prettier.jsxBracketSameLine": true,
+  "prettier.printWidth": 120,
+  "files.eol": "\n",
+  "files.trimFinalNewlines": true
+}

@@ -1,0 +1,25 @@
+.EditMenuContainer {
+  width: 100%;
+}
+
+.EditMenu {
+  text-align: left;
+}
+
+.Editor {
+  height: 20vmin;
+  overflow-y: scroll;
+  resize: none;
+  text-align: left;
+  width: 100%;
+}
+
+.NoteEdit {
+  border: 1px solid black;
+  height: 40vmin;
+  left: 20vw;
+  padding: 5vmin;
+  position: absolute;
+  top: 30vmin;
+  width: 60vw;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ContentEditable from "react-contenteditable";
 import "./Note.css";
 import del from "./del.svg";
 import edit from "./edit.svg";
@@ -14,11 +15,20 @@ class Note extends Component {
   }
 
   render() {
+    const { note } = this.state;
+
     return (
-      <div className="Note">
-        {this.state.note.note}
+      <div className="Note NoteView">
+        <ContentEditable html={note.note} disabled={true} />
         <br />
-        <img className="Icon" src={edit} alt="edit" />
+        <img
+          className="Icon"
+          alt="edit"
+          onClick={() => {
+            this.props.edit(note);
+          }}
+          src={edit}
+        />
         <img
           className="Icon"
           src={del}
