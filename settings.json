@@ -1,9 +1,11 @@
 {
   "editor.formatOnSave": true,
-  "git.ignoreMissingGitWarning": true,
   "explorer.confirmDelete": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "git.ignoreMissingGitWarning": true,
   "prettier.jsxBracketSameLine": true,
   "prettier.printWidth": 120,
-  "files.eol": "\n",
-  "files.trimFinalNewlines": true
+  "window.zoomLevel": 0
 }

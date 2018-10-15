@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import ContentEditable from "react-contenteditable";
 import sanitizeHtml from "sanitize-html";
 import "./Edit.css";
@@ -8,6 +9,7 @@ import save from "./save.svg";
 class Edit extends Component {
   constructor(props) {
     super(props);
+
     this.state = this.props.note instanceof Object ? this.props.note : {};
   }
 
@@ -15,9 +17,12 @@ class Edit extends Component {
     this.setState({ note: event.target.value });
   };
 
+  componentDidMount() {
+    this.setState();
+  }
+
   render() {
     const { note } = this.state;
-    console.log(note);
 
     return (
       <div className="Note NoteEdit">
@@ -37,10 +42,11 @@ class Edit extends Component {
         <br />
         <ContentEditable
           className="Editor"
-          html={note} // innerHTML of the editable div
-          disabled={false} // use true to disable edition
-          onChange={this.handleChange} // handle innerHTML change
+          html={note}
+          disabled={false}
+          onChange={this.handleChange}
           onBlur={this.sanitize}
+          ref="editor"
         />
       </div>
     );
@@ -53,6 +59,13 @@ class Edit extends Component {
       })
     });
   };
+
+  setState(state, callback) {
+    super.setState(state, () => {
+      if (callback) callback();
+      ReactDOM.findDOMNode(this.refs.editor).focus();
+    });
+  }
 }
 
 export default Edit;
