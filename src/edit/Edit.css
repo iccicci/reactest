@@ -1,9 +1,25 @@
+.Colors {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 1vw;
+  margin-right: 10vw;
+}
+
+.EditButton {
+  background-color: gray;
+  color: black;
+  margin-right: 2vmin;
+}
+
 .EditMenuContainer {
   width: 100%;
 }
 
 .EditMenu {
+  left: 0px;
+  position: relative;
   text-align: left;
+  width: fit-content;
 }
 
 .Editor {

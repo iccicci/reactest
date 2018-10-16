@@ -14,7 +14,7 @@ class Menu extends Component {
 
     return (
       <div className="Menu">
-        <Add app={app} edit={edit} />
+        {this.props.notes.state.edit ? null : <Add app={app} edit={edit} />}
         <Welcome app={app} />
       </div>
     );

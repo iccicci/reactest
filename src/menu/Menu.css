@@ -1,4 +1,5 @@
 .Add {
+  cursor: pointer;
   height: 5vmin;
   left: 2vmin;
   top: 2vmin;
@@ -15,6 +16,7 @@
 .MenuButton {
   background-color: white;
   color: #0b3ead;
+  font-weight: bold;
 }
 
 .Username {

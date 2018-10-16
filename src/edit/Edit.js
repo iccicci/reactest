@@ -10,7 +10,7 @@ class Edit extends Component {
   constructor(props) {
     super(props);
 
-    this.state = this.props.note instanceof Object ? this.props.note : {};
+    this.state = this.props.note instanceof Object ? this.props.note : { note: "" };
   }
 
   handleChange = event => {
@@ -28,12 +28,23 @@ class Edit extends Component {
       <div className="Note NoteEdit">
         <div className="EditMenuContainer">
           <div className="EditMenu">
+            <EditButton cmd="bold" />
+            <EditButton cmd="italic" />
+            <select className="Colors" style={{ backgroundColor: this.state.color }} value={this.state.color}>
+              {["white", "yellow", "green", "red", "purple"].map(color => {
+                return (
+                  <option key={color} style={{ backgroundColor: color }}>
+                    {color}
+                  </option>
+                );
+              })}
+            </select>
             <img className="Icon" src={save} alt="edit" />
             <img
               className="Icon"
               src={cancel}
               onClick={() => {
-                this.del();
+                this.props.notes.setState({ edit: null });
               }}
               alt="del"
             />
@@ -65,6 +76,24 @@ class Edit extends Component {
       if (callback) callback();
       ReactDOM.findDOMNode(this.refs.editor).focus();
     });
+  }
+}
+
+class EditButton extends Component {
+  render() {
+    const { cmd } = this.props;
+
+    return (
+      <span
+        className="Button EditButton"
+        key={cmd}
+        onMouseDown={event => {
+          event.preventDefault();
+          document.execCommand(cmd);
+        }}>
+        {cmd === "bold" ? <b>Bold</b> : <i>Italic</i>}
+      </span>
+    );
   }
 }
 

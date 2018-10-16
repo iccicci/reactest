@@ -1,6 +1,7 @@
 .LoginButton {
   background-color: #0b3ead;
   color: white;
+  font-weight: bold;
 }
 
 .Error {

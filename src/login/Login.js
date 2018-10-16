@@ -38,22 +38,14 @@ class Login extends Component {
         <br />
         <br />
         <div>
-          <span
-            className="Button LoginButton"
-            onClick={() => this.login()}
-            style={style}
-          >
+          <span className="Button LoginButton" onClick={() => this.login()} style={style}>
             Login
           </span>
         </div>
         <br />
         <div className="Error">
           &nbsp;
-          {error
-            ? error === 1
-              ? "Allowed caracters: 0-9,A-Z,a-z"
-              : "Minimum 3 characters"
-            : ""}
+          {error ? (error === 1 ? "Allowed caracters: 0-9,A-Z,a-z" : "Minimum 3 characters") : ""}
         </div>
       </div>
     );

@@ -26,6 +26,7 @@ class Notes extends Component {
           edit={() => {
             this.edit();
           }}
+          notes={this}
         />
         {notes.map(note => {
           return (
@@ -39,22 +40,14 @@ class Notes extends Component {
             />
           );
         })}
-        {edit ? <Edit note={edit} /> : null}
+        {edit ? <Edit note={edit} notes={this} /> : null}
         <div className="Credits">
           Icons made by{" "}
-          <a
-            href="https://www.flaticon.com/authors/smashicons"
-            title="Share"
-            target="_blank"
-            rel="noopener noreferrer">
+          <a href="https://www.flaticon.com/authors/smashicons" title="Share" target="_blank" rel="noopener noreferrer">
             Share
           </a>{" "}
           from{" "}
-          <a
-            href="https://www.flaticon.com/"
-            title="Flaticon"
-            target="_blank"
-            rel="noopener noreferrer">
+          <a href="https://www.flaticon.com/" title="Flaticon" target="_blank" rel="noopener noreferrer">
             www.flaticon.com
           </a>{" "}
           is licensed by{" "}

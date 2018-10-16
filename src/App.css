@@ -16,8 +16,7 @@
 .Button {
   border-radius: 1vmin;
   cursor: pointer;
-  font-weight: bold;
-  padding: 1vmin;
+  padding: 1vw;
 }
 
 .Icon {
