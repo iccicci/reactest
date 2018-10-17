@@ -37,6 +37,21 @@ io.on("connection", client => {
     console.log("logout", username);
   };
 
+  const newNote = (note, color) => {
+    fetch(
+      `http://localhost:8080/api/users/${client.userid}/notes`,
+      {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        payload: JSON.stringify({
+          color: color,
+          note: note
+        })
+      },
+      refresh
+    );
+  };
+
   const refresh = () => {
     const { userid, username } = client;
 
@@ -76,12 +91,12 @@ io.on("connection", client => {
 
     fetch(`http://localhost:8080/api/users?username=${username}`, (error, meta, body) => {
       const users = JSON.parse(body.toString());
-      const attach = user => {
-        client.userid = user.id;
-        refresh();
-      };
+      const attach = user => {};
 
-      if (users.length && "id" in users[0]) return attach(users[0]);
+      if (users.length && "id" in users[0]) {
+        client.userid = users[0].id;
+        return refresh();
+      }
 
       fetch(
         `http://localhost:8080/api/users`,
@@ -93,19 +108,8 @@ io.on("connection", client => {
         (error, meta, body) => {
           const user = JSON.parse(body.toString());
 
-          fetch(
-            `http://localhost:8080/api/users/${user.id}/notes`,
-            {
-              headers: { "Content-Type": "application/json" },
-              method: "POST",
-              payload: JSON.stringify({
-                note: `Welcome <b>${username}</b>,<br /><br />this is your <i>first</i> note!`
-              })
-            },
-            (error, meta, body) => {
-              attach(user);
-            }
-          );
+          client.userid = user.id;
+          newNote(`Welcome <b>${username}</b>,<br /><br />this is your <i>first</i> note!`);
         }
       );
     });
@@ -114,6 +118,26 @@ io.on("connection", client => {
   });
 
   client.on("logout", logout);
+
+  client.on("save", data => {
+    const { color, id, note } = data;
+
+    if (id)
+      return fetch(
+        `http://localhost:8080/api/notes/${id}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "PATCH",
+          payload: JSON.stringify({
+            color: color,
+            note: note
+          })
+        },
+        refresh
+      );
+
+    newNote(note, color);
+  });
 });
 
 server.listen(8080);

@@ -7,7 +7,7 @@ import edit from "./edit.svg";
 class Note extends Component {
   constructor(props) {
     super(props);
-    this.state = { note: props.note };
+    this.state = props.note;
   }
 
   del() {
@@ -15,11 +15,11 @@ class Note extends Component {
   }
 
   render() {
-    const { note } = this.state;
+    const { color, note } = this.state;
 
     return (
-      <div className="Note NoteView">
-        <ContentEditable html={note.note} disabled={true} />
+      <div className="Note NoteView" style={{ backgroundColor: color }}>
+        <ContentEditable html={note} disabled={true} />
         <br />
         <img
           className="Icon"

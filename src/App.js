@@ -23,7 +23,7 @@ class App extends Component {
     });
 
     this.socket.on("notes", data => {
-      this.setState({ notes: data.notes });
+      this.refs.notes.setState({ notes: data.notes });
     });
   }
 
@@ -37,14 +37,14 @@ class App extends Component {
   }
 
   render() {
-    const { connected, username } = this.state;
+    const { connected, notes, username } = this.state;
 
     return (
       <div className="App">
         <header className="AppHeader">
           {connected ? (
             username ? (
-              <Notes app={this} />
+              <Notes app={this} ref="notes" />
             ) : (
               <Login app={this} />
             )

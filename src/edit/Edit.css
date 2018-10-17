@@ -35,7 +35,7 @@
   height: 40vmin;
   left: 20vw;
   padding: 5vmin;
-  position: absolute;
+  position: fixed;
   top: 30vmin;
   width: 60vw;
 }

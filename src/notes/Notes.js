@@ -7,7 +7,13 @@ import "./Notes.css";
 class Notes extends Component {
   constructor(props) {
     super(props);
-    this.state = { edit: null };
+    this.state = { edit: null, notes: [] };
+  }
+
+  componentDidUpdate() {
+    this.state.notes.map(note => {
+      this.refs[note.id].setState(note);
+    });
   }
 
   edit(note) {
@@ -16,8 +22,7 @@ class Notes extends Component {
 
   render() {
     const { app } = this.props;
-    const { edit } = this.state;
-    const { notes } = app.state;
+    const { edit, notes } = this.state;
 
     return (
       <header className="AppHeader">
@@ -37,10 +42,11 @@ class Notes extends Component {
               }}
               key={note.id}
               note={note}
+              ref={note.id}
             />
           );
         })}
-        {edit ? <Edit note={edit} notes={this} /> : null}
+        {edit ? <Edit app={app} note={edit} notes={this} /> : null}
         <div className="Credits">
           Icons made by{" "}
           <a href="https://www.flaticon.com/authors/smashicons" title="Share" target="_blank" rel="noopener noreferrer">

@@ -13,7 +13,11 @@ class Edit extends Component {
     this.state = this.props.note instanceof Object ? this.props.note : { note: "" };
   }
 
-  handleChange = event => {
+  onChangeColor = event => {
+    this.setState({ color: event.target.value });
+  };
+
+  onChangeText = event => {
     this.setState({ note: event.target.value });
   };
 
@@ -22,15 +26,16 @@ class Edit extends Component {
   }
 
   render() {
-    const { note } = this.state;
+    const { app, notes } = this.props;
+    const { color, note } = this.state;
 
     return (
-      <div className="Note NoteEdit">
+      <div className="Note NoteEdit" style={{ backgroundColor: color }}>
         <div className="EditMenuContainer">
           <div className="EditMenu">
             <EditButton cmd="bold" />
             <EditButton cmd="italic" />
-            <select className="Colors" style={{ backgroundColor: this.state.color }} value={this.state.color}>
+            <select className="Colors" onChange={this.onChangeColor} style={{ backgroundColor: color }} value={color}>
               {["white", "yellow", "green", "red", "purple"].map(color => {
                 return (
                   <option key={color} style={{ backgroundColor: color }}>
@@ -39,14 +44,22 @@ class Edit extends Component {
                 );
               })}
             </select>
-            <img className="Icon" src={save} alt="edit" />
             <img
+              alt="edit"
               className="Icon"
-              src={cancel}
               onClick={() => {
-                this.props.notes.setState({ edit: null });
+                app.socket.emit("save", this.state);
+                notes.setState({ edit: null });
               }}
+              src={save}
+            />
+            <img
               alt="del"
+              className="Icon"
+              onClick={() => {
+                notes.setState({ edit: null });
+              }}
+              src={cancel}
             />
           </div>
         </div>
@@ -55,7 +68,7 @@ class Edit extends Component {
           className="Editor"
           html={note}
           disabled={false}
-          onChange={this.handleChange}
+          onChange={this.onChangeText}
           onBlur={this.sanitize}
           ref="editor"
         />
