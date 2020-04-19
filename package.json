@@ -1,35 +1,26 @@
 {
-  "name": "reactest",
-  "version": "0.1.0",
+  "name": "lookup-server",
+  "version": "0.0.1",
+  "private": true,
   "dependencies": {
-    "express": "4.16.4",
-    "fetch": "1.1.0",
-    "json-server": "0.14.0",
-    "nodemon": "1.18.4",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
-    "react-contenteditable": "3.1.1",
-    "react-scripts": "2.0.4",
-    "sanitize-html": "1.19.1",
-    "socket.io": "2.1.1"
+    "babel-core": "6.14.0",
+    "express": "4.13.3",
+    "fs": "0.0.2",
+    "sql.js": "0.3.2"
   },
   "scripts": {
-    "start": "react-scripts start | npm run server",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "./node_modules/.bin/nodemon --watch server server/server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node start-client.js",
+    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
+    "lint": "eslint ."
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "repository": "https://github.com/iccicci/reactest",
-  "license": "MIT",
-  "proxy": "http://localhost:8080",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "concurrently": "3.1.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.9.0"
+  }
 }
